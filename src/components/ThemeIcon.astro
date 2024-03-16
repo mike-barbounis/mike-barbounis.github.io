@@ -20,7 +20,8 @@
 </style>
 
 
-<script> 
+<script is:inline> 
+  document.documentElement.classList.add('dark');
   document.addEventListener('astro:page-load', () => {
 
     const theme = (() => {
@@ -29,8 +30,8 @@
       }
       if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         return 'dark';
-      }
-        return 'light';
+      } 
+      return 'light';
     })();
   
     if (theme === 'light') {
