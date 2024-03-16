@@ -8,7 +8,7 @@ import { ViewTransitions } from 'astro:transitions';
 
 type Props = CollectionEntry<'projects'>['data'];
 
-const { title, description, updatedDate, heroImage, team, teamUrl } = Astro.props;
+const { title, description, updatedDate, heroImage, team, teamUrl, siteUrl } = Astro.props;
 ---
 
 <html lang="en">
@@ -43,6 +43,15 @@ const { title, description, updatedDate, heroImage, team, teamUrl } = Astro.prop
 				text-align: center;
 				line-height: 1;
 				border: 1px solid blue;
+			}
+			a {
+				color: blue;
+			}
+			:global(.dark) a {
+				color: #fdd000;
+			}
+			a:hover {
+				opacity: 0.7;
 			}
 			:global(.dark) .article {
 				border: 1px solid #fdd000;
@@ -88,6 +97,7 @@ const { title, description, updatedDate, heroImage, team, teamUrl } = Astro.prop
 							}
 						</div>
 						<h1 transition:name={title}>{title}</h1>
+						<a target="_blank" href={siteUrl}>Visit site</a>
                         {heroImage && <img src={heroImage} class="mx-auto my-4 w-[200px] h-[200px]" alt={title} transition:name={'heroImage'+title} /> }
 						<hr />
                         {team !== "Solo" &&
