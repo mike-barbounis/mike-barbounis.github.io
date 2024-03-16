@@ -1,0 +1,26 @@
+---
+import { ViewTransitions } from "astro:transitions";
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+
+---
+
+<!doctype>
+<html>
+    <head>
+        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+        <ViewTransitions />
+    </head>
+    <body>
+        <Header />
+        <main>
+			<div class="mb-10 flex flex-col lg:flex-row items-center gap-6 relative shadow-indexCard border-[4px] border-[#23384d] p-8">
+				<div class="m-auto">
+					<p>Currently learning Astro and working on client's projects.</p>
+					<p>Contact me if you want me to create a website or application.</p>
+				</div>
+			</div>
+        </main>
+    </body>
+</html>

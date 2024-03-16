@@ -1,0 +1,109 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import { ViewTransitions } from 'astro:transitions';
+
+type Props = CollectionEntry<'projects'>['data'];
+
+const { title, description, updatedDate, heroImage, team, teamUrl } = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+		<ViewTransitions />
+		<style>
+			main {
+				width: calc(100% - 2em);
+				max-width: 100%;
+				margin: 0;
+			}
+			.hero-image {
+				width: 100%;
+			}
+			.hero-image img {
+				display: block;
+				margin: 0 auto;
+				border-radius: 12px;
+				box-shadow: var(--box-shadow);
+			}
+			.prose {
+				width: 720px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 1em;
+				color: rgb(var(--gray-dark));
+			}
+			.article {
+				margin-bottom: 1em;
+				padding: 1em 0;
+				text-align: center;
+				line-height: 1;
+				border: 1px solid blue;
+			}
+			:global(.dark) .article {
+				border: 1px solid #fdd000;
+			}
+			.article h1 {
+				margin: 0 0 0.5em 0;
+			}
+			.date {
+				margin-bottom: 0.5em;
+				color: rgb(var(--gray));
+			}
+            .team {
+                color: blue;
+                opacity: 1;
+                transition: 0.3s opacity ease;
+            }
+            .team:hover {
+                opacity: 0.7;
+                transition: 0.3s color ease;
+            }
+            :global(.dark) .team {
+                color: #fdd000;
+            }
+			.last-updated-on {
+				font-style: italic;
+			}
+		</style>
+	</head>
+
+	<body>
+		<Header />
+		<main>
+			<article class="max-w-[700px] mx-auto article" transition:name={'border'+title}>
+				<div  class="title max-w-[700px] mx-auto">
+						<div class="date">
+							<!-- <FormattedDate transition:name={'date'+title} date={pubDate} /> -->
+							{
+								updatedDate && (
+									<div class="last-updated-on">
+										Last updated on <FormattedDate date={updatedDate} />
+									</div>
+								)
+							}
+						</div>
+						<h1 transition:name={title}>{title}</h1>
+                        {heroImage && <img src={heroImage} class="mx-auto my-4 w-[200px] h-[200px]" alt={title} transition:name={'heroImage'+title} /> }
+						<hr />
+                        {team !== "Solo" &&
+                            <div>
+                                Worked with {!!teamUrl && <a href={teamUrl} target="_blank" class="team" >{team}</a>}
+                            </div>
+                        }
+					</div>
+				<!-- <div class="hero-image">
+					{heroImage && <img width={1020} height={510} src={heroImage} alt="" />}
+				</div> -->
+				<div class="prose">
+					<slot />
+				</div>
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>
