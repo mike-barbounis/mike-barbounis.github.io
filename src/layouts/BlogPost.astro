@@ -18,8 +18,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 		<style>
 			main {
 				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
+				max-width: 700px;
 			}
 			.hero-image {
 				width: 100%;
@@ -64,7 +63,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 
 	<body>
 		<Header />
-		<main>
+		<main class="mx-auto">
 			<article class="article mx-auto max-w-[700px]" transition:name={'border'+title}> 
 				<div  class="title ">
 						<div class="date">
