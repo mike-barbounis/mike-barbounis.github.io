@@ -19,10 +19,6 @@ const posts = (await getCollection('projects')).sort(
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<ViewTransitions />
 		<style>
-			main {
-				width: 800px;
-			}
-
             .projects-grid {
                 width: 100%;
                 display: grid;
@@ -56,12 +52,12 @@ const posts = (await getCollection('projects')).sort(
 	</head>
 	<body>
 		<Header />
-		<main>
+		<main class="">
 			<!-- <div class="tags flex gap-2">
 				<a href="/projects?tag=webdev">web</a>
 				<a href="/projects?tag=desktop">desktop</a>
 			</div> -->
-			<section class="projects-grid">
+			<section class="w-auto grid gap-[5px] grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(200px,1fr))]">
                 {
                     posts.map((post) => (
                         <div transition:name={'border'+post.data.title} class="item  p-2 group">
