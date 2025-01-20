@@ -7,7 +7,7 @@ import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
 import { ViewTransitions } from 'astro:transitions';
 
-const posts = (await getCollection('logs')).sort(
+const posts = (await getCollection('posts')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
@@ -16,7 +16,7 @@ const posts = (await getCollection('logs')).sort(
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={SITE_TITLE + " - Blog"} description={SITE_DESCRIPTION} />
 		<ViewTransitions />
 		<style>
 			main {
@@ -55,8 +55,8 @@ const posts = (await getCollection('logs')).sort(
 					{
 						posts.map((post) => (
 							<li transition:name={'border'+post.data.title} class="item p-2 group">
-								<a href={`/logs/${post.slug}/`} class="">
-									<h6 transition:name={post.data.title} class="title mb-0">{post.data.title}</h4>
+								<a href={`/blog/${post.slug}/`} class="">
+									<h6 transition:name={post.data.title} class="title mb-3">{post.data.title}</h4>
 									<div class="mt-1 flex text-[17px] justify-between">
 										<FormattedDate date={post.data.pubDate} transition:name={'date'+post.data.title} />
 										<div class="">{post.data.tag}</div>

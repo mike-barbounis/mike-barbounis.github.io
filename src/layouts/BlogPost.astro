@@ -6,9 +6,9 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import { ViewTransitions } from 'astro:transitions';
 
-type Props = CollectionEntry<'logs'>['data'];
+type Props = CollectionEntry<'posts'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, tag } = Astro.props;
 ---
 
 <html lang="en">
@@ -17,7 +17,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 		<ViewTransitions />
 		<style>
 			main {
-				width: calc(100% - 2em);
+				width: calc(100%);
 				max-width: 700px;
 			}
 			.hero-image {
@@ -30,10 +30,10 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				box-shadow: var(--box-shadow);
 			}
 			.prose {
-				width: 720px;
+				/* width: 720px;
 				max-width: calc(100% - 2em);
 				margin: auto;
-				padding: 1em;
+				padding: 1em; */
 				color: rgb(var(--gray-dark));
 			}
 			.title {
@@ -77,12 +77,13 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 							}
 						</div>
 						<h1 transition:name={title}>{title}</h1>
+						<div>{tag}</div>
 						<hr />
 					</div>
 				<div class="hero-image">
 					{heroImage && <img width={600} height={510} src={heroImage} alt="" />}
 				</div>
-				<div class="prose">
+				<div class="prose p-4 mt-10">
 					<slot />
 				</div>
 			</article>
